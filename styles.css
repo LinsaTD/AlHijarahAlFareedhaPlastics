@@ -692,6 +692,10 @@ a {
         grid-template-columns: 1fr;
     }
 
+    .gallery-item-featured {
+        grid-column: span 1;
+    }
+
     .footer-content {
         flex-direction: column;
         gap: 20px;
@@ -719,5 +723,28 @@ a {
 
     .nav-menu.open {
         display: flex;
+    }
+
+    .portfolio-grid {
+        grid-auto-rows: 220px;
+        gap: 14px;
+    }
+
+    .gallery-item {
+        min-height: 220px;
+    }
+
+    .gallery-lightbox {
+        padding: 76px 12px 24px;
+    }
+
+    .gallery-lightbox-image {
+        max-width: 100%;
+        max-height: calc(100vh - 120px);
+    }
+
+    .gallery-close {
+        top: 16px;
+        right: 16px;
     }
 }
