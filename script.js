@@ -47,12 +47,18 @@ document.addEventListener("DOMContentLoaded", () => {
         heroVideo.muted = true;
         heroVideo.playsInline = true;
 
-        const playPromise = heroVideo.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(error => {
-                console.warn("Autoplay prevented by browser:", error);
-            });
-        }
+        const startHeroVideo = () => {
+            const playPromise = heroVideo.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.warn("Autoplay prevented by browser:", error);
+                });
+            }
+        };
+
+        heroVideo.addEventListener("canplay", startHeroVideo, { once: true });
+        heroVideo.load();
+        startHeroVideo();
     }
 
     const galleryLightbox = document.getElementById("gallery-lightbox");
