@@ -457,9 +457,74 @@ a {
 }
 
 /* Portfolio */
+.portfolio-tabs {
+    margin-top: 12px;
+}
+
+.portfolio-tab-list {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 28px;
+    padding: 6px;
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.55);
+    scrollbar-width: thin;
+}
+
+.portfolio-tab {
+    flex: 1 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 52px;
+    padding: 12px 20px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-muted);
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.portfolio-tab span {
+    color: var(--accent);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+}
+
+.portfolio-tab:hover,
+.portfolio-tab:focus-visible,
+.portfolio-tab.is-active {
+    outline: none;
+    border-color: var(--accent);
+    background: var(--primary);
+    color: var(--white);
+}
+
+.portfolio-panel[hidden] {
+    display: none;
+}
+
+.portfolio-panel.is-active {
+    animation: gallery-panel-in 0.45s ease both;
+}
+
+@keyframes gallery-panel-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-auto-rows: 190px;
     gap: 18px;
 }
@@ -476,6 +541,10 @@ a {
 .gallery-item-featured {
     grid-column: span 2;
     grid-row: span 2;
+}
+
+.portfolio-panel .gallery-item:nth-child(3n + 2) {
+    grid-row: span 1;
 }
 
 .gallery-item img {
@@ -790,6 +859,33 @@ a {
     .portfolio-grid {
         grid-auto-rows: 220px;
         gap: 14px;
+    }
+
+    .portfolio-tab-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-bottom: 22px;
+        padding: 5px;
+        overflow: visible;
+        border-radius: 10px;
+    }
+
+    .portfolio-tab {
+        width: 100%;
+        min-width: 0;
+        min-height: 58px;
+        padding: 9px 7px;
+        gap: 5px;
+        flex-direction: column;
+        font-size: 0.76rem;
+        line-height: 1.2;
+        white-space: normal;
+        text-align: center;
+    }
+
+    .portfolio-tab span {
+        font-size: 0.65rem;
     }
 
     .gallery-item {

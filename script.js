@@ -101,6 +101,41 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    const galleryTabs = document.querySelector("[data-gallery-tabs]");
+    if (galleryTabs) {
+        const tabs = [...galleryTabs.querySelectorAll("[role=tab]")];
+        const panels = [...galleryTabs.querySelectorAll("[role=tabpanel]")];
+
+        const activateTab = tab => {
+            const activePanelId = tab.dataset.tab;
+
+            tabs.forEach(item => {
+                const isActive = item === tab;
+                item.classList.toggle("is-active", isActive);
+                item.setAttribute("aria-selected", String(isActive));
+                item.tabIndex = isActive ? 0 : -1;
+            });
+
+            panels.forEach(panel => {
+                const isActive = panel.id === activePanelId;
+                panel.classList.toggle("is-active", isActive);
+                panel.hidden = !isActive;
+            });
+        };
+
+        tabs.forEach((tab, index) => {
+            tab.addEventListener("click", () => activateTab(tab));
+            tab.addEventListener("keydown", event => {
+                if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+                event.preventDefault();
+                const direction = event.key === "ArrowRight" ? 1 : -1;
+                const nextTab = tabs[(index + direction + tabs.length) % tabs.length];
+                activateTab(nextTab);
+                nextTab.focus();
+            });
+        });
+    }
 });
 
 function handleFormSubmit(event) {
